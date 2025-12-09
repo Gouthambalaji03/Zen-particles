@@ -18,6 +18,12 @@ export default defineConfig({
     }
   },
   server: {
-    sourcemapIgnoreList: () => true
-  }
+    sourcemapIgnoreList: () => true,
+    hmr: {
+      overlay: false
+    }
+  },
+  // Suppress source map warnings
+  logLevel: 'warn',
+  clearScreen: false
 })
