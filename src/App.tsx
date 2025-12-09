@@ -1,57 +1,46 @@
-import { useState, useCallback, useRef } from 'react';
-import HandTracker from './components/HandTracker';
-import ParticleSystem from './components/ParticleSystem';
-import Controls from './components/Controls';
-import { ShapeType, HandData } from './types';
+import { useState, useCallback, useRef } from 'react'
+import HandTracker from './components/HandTracker'
+import ParticleSystem from './components/ParticleSystem'
+import Controls from './components/Controls'
+import { ShapeType, HandData } from './types'
 
 function App() {
-  const [shape, setShape] = useState<ShapeType>('heart');
-  const [color, setColor] = useState<string>('#00ffff');
-  const [tension, setTension] = useState<number>(0);
-  const [explosion, setExplosion] = useState<number>(0);
+  const [shape, setShape] = useState<ShapeType>('heart')
+  const [color, setColor] = useState<string>('#00ffff')
+  const [tension, setTension] = useState<number>(0)
+  const [explosion, setExplosion] = useState<number>(0)
 
-  const prevTensionRef = useRef<number>(0);
-  const clapTimeoutRef = useRef<number>();
+  const prevTensionRef = useRef<number>(0)
+  const clapTimeoutRef = useRef<number>()
 
   const handleHandData = useCallback((data: HandData) => {
-    setTension(data.tension);
+    setTension(data.tension)
 
-    // Clap detection logic
-    const prevTension = prevTensionRef.current;
-    const currentTension = data.tension;
+    const prevTension = prevTensionRef.current
+    const currentTension = data.tension
 
-    // Detect rapid spike: from low (<0.35) to high (>0.8)
     if (prevTension < 0.35 && currentTension > 0.8) {
-      setExplosion(1.0);
+      setExplosion(1)
 
-      // Clear existing timeout
-      if (clapTimeoutRef.current) {
-        clearTimeout(clapTimeoutRef.current);
-      }
-
-      // Reset explosion after delay
       clapTimeoutRef.current = window.setTimeout(() => {
-        setExplosion(0);
-      }, 500);
+        setExplosion(0)
+      }, 500)
     }
 
-    prevTensionRef.current = currentTension;
-  }, []);
+    prevTensionRef.current = currentTension
+  }, [])
 
   const handleShapeChange = useCallback((newShape: ShapeType) => {
-    setShape(newShape);
-  }, []);
+    setShape(newShape)
+  }, [])
 
   const handleColorChange = useCallback((newColor: string) => {
-    setColor(newColor);
-  }, []);
+    setColor(newColor)
+  }, [])
 
   return (
     <div className="relative w-full h-screen overflow-hidden">
-      {/* Background Particle System */}
       <ParticleSystem shape={shape} color={color} tension={tension} explosion={explosion} />
-
-      {/* Title */}
       <div className="fixed top-8 left-1/2 transform -translate-x-1/2 z-40 text-center">
         <h1 className="text-white text-4xl font-bold tracking-wider mb-2 drop-shadow-2xl">
           ZEN PARTICLES
@@ -60,11 +49,7 @@ function App() {
           Open hand to expand
         </p>
       </div>
-
-      {/* Hand Tracker */}
       <HandTracker onHandData={handleHandData} />
-
-      {/* Controls */}
       <Controls
         shape={shape}
         color={color}
@@ -73,7 +58,7 @@ function App() {
         onColorChange={handleColorChange}
       />
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

@@ -1,5 +1,5 @@
-import { Heart, Flower, Disc, User, Sparkles, Circle } from 'lucide-react';
-import { ControlsProps, ShapeType } from '../types';
+import { Heart, Flower, Disc, User, Sparkles, Circle } from 'lucide-react'
+import { ControlsProps, ShapeType } from '../types'
 
 const shapes: { type: ShapeType; icon: React.ComponentType<any>; label: string }[] = [
   { type: 'heart', icon: Heart, label: 'Heart' },
@@ -7,8 +7,8 @@ const shapes: { type: ShapeType; icon: React.ComponentType<any>; label: string }
   { type: 'saturn', icon: Disc, label: 'Saturn' },
   { type: 'buddha', icon: User, label: 'Buddha' },
   { type: 'fireworks', icon: Sparkles, label: 'Fireworks' },
-  { type: 'sphere', icon: Circle, label: 'Sphere' },
-];
+  { type: 'sphere', icon: Circle, label: 'Sphere' }
+]
 
 const colors = [
   { name: 'Cyan', value: '#00ffff' },
@@ -18,22 +18,21 @@ const colors = [
   { name: 'Orange', value: '#ff6600' },
   { name: 'Purple', value: '#9933ff' },
   { name: 'Pink', value: '#ff69b4' },
-  { name: 'Blue', value: '#0099ff' },
-];
+  { name: 'Blue', value: '#0099ff' }
+]
 
 const Controls = ({ shape, color, tension, onShapeChange, onColorChange }: ControlsProps) => {
   return (
     <div className="fixed bottom-8 left-1/2 transform -translate-x-1/2 z-40">
       <div className="bg-black/40 backdrop-blur-xl border border-white/20 rounded-2xl p-6 shadow-2xl">
-        {/* Shape Selector */}
         <div className="mb-6">
           <h3 className="text-white/60 text-xs font-medium mb-3 text-center uppercase tracking-wider">
             Shape
           </h3>
           <div className="flex gap-3">
             {shapes.map((s) => {
-              const Icon = s.icon;
-              const isSelected = shape === s.type;
+              const Icon = s.icon
+              const isSelected = shape === s.type
               return (
                 <button
                   key={s.type}
@@ -67,19 +66,18 @@ const Controls = ({ shape, color, tension, onShapeChange, onColorChange }: Contr
                     <div className="absolute inset-0 rounded-xl animate-pulse bg-white/10" />
                   )}
                 </button>
-              );
+              )
             })}
           </div>
         </div>
 
-        {/* Color Picker */}
         <div className="mb-6">
           <h3 className="text-white/60 text-xs font-medium mb-3 text-center uppercase tracking-wider">
             Color
           </h3>
           <div className="flex gap-2 justify-center">
             {colors.map((c) => {
-              const isSelected = color === c.value;
+              const isSelected = color === c.value
               return (
                 <button
                   key={c.value}
@@ -101,12 +99,11 @@ const Controls = ({ shape, color, tension, onShapeChange, onColorChange }: Contr
                     />
                   )}
                 </button>
-              );
+              )
             })}
           </div>
         </div>
 
-        {/* Tension Status Bar */}
         <div>
           <div className="flex items-center justify-between mb-2">
             <h3 className="text-white/60 text-xs font-medium uppercase tracking-wider">
@@ -131,7 +128,7 @@ const Controls = ({ shape, color, tension, onShapeChange, onColorChange }: Contr
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Controls;
+export default Controls

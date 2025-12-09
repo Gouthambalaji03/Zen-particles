@@ -21,7 +21,7 @@ const dummySourceMap = {
 
 try {
   fs.writeFileSync(sourceMapPath, JSON.stringify(dummySourceMap));
-  console.log(' Fixed MediaPipe source map');
+  console.log('Fixed MediaPipe source map');
 } catch (error) {
   // Silently fail if the file can't be created
 }
