@@ -176,6 +176,7 @@ const ParticleSystem = ({ shape, color, tension, explosion }: ParticleSystemProp
 
     // Scene setup
     const scene = new THREE.Scene();
+    scene.background = new THREE.Color(0x000000);
     sceneRef.current = scene;
 
     // Camera setup
@@ -189,9 +190,10 @@ const ParticleSystem = ({ shape, color, tension, explosion }: ParticleSystemProp
     cameraRef.current = camera;
 
     // Renderer setup
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setClearColor(0x000000, 1);
     containerRef.current.appendChild(renderer.domElement);
     rendererRef.current = renderer;
 
@@ -342,7 +344,7 @@ const ParticleSystem = ({ shape, color, tension, explosion }: ParticleSystemProp
   return (
     <div
       ref={containerRef}
-      className="fixed inset-0 -z-10"
+      className="fixed inset-0 z-0 pointer-events-none"
       style={{ background: 'linear-gradient(to bottom, #000000, #1a1a1a)' }}
     />
   );
